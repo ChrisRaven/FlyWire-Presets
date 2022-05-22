@@ -12,26 +12,27 @@
 if (!document.getElementById('kk-dock')) {
   let script = document.createElement('script')
   script.src = 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js'
-  script.addEventListener('load', main)
+  script.addEventListener('load', wait)
   document.head.appendChild(script)
 }
 else {
-  main()
+  wait()
 }
 
-let userId
-
-function main() {
-  let dock = new Dock()
-
+function wait() {
   let wait = setInterval(() => {
     userId = document.querySelector('#loggedInUserDropdown .nge-usercard-email')
     if (userId) {
       clearInterval(wait)
-      userId = userId.textContent
+      main(userId)
+
     }
-  }, 100)
-  
+  }, 100)    
+}
+
+function main(userId) {
+  let dock = new Dock()
+  userId = userId.textContent
 
   dock.addAddon({
     id: 'kk-presets',
@@ -117,6 +118,7 @@ function main() {
     }
   })
 }
+
 
 function setPresets(number) {
   let state = readFromStorage(number)
