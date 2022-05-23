@@ -53,38 +53,24 @@ function main(userId) {
       </table>
     `,
     css: /*css*/`
-      :root {
-        --kk-presets-button-color: #5454d3;
-      }
-
-      #kk-presets button {
-        color: white;
-        background-color: transparent;
-        border: 1px solid var(--kk-presets-button-color);
-        border-radius: 4px;
-        margin: 2px;
-        padding: 4px 8px;
-        cursor: pointer;
-      }
-
       #kk-presets button:hover {
-        box-shadow: 0 0 0.3em var(--kk-presets-button-color);
+        box-shadow: 0 0 0.3em var(--kk-dock-addon-button-color);
       }
 
       #kk-presets button:hover:active {
-        box-shadow: 0 0 0.5em var(--kk-presets-button-color);
+        box-shadow: 0 0 0.5em var(--kk-dock-addon-button-color);
       }
 
       #kk-presets .presets-1-set {
-        --kk-presets-button-color: #5493d3;
+        --kk-dock-addon-button-color: #5493d3;
       }
 
       #kk-presets .presets-2-set {
-        --kk-presets-button-color: #dd1f40;
+        --kk-dock-addon-button-color: #dd1f40;
       }
 
       #kk-presets .presets-3-set {
-        --kk-presets-button-color: #2ee300;
+        --kk-dock-addon-button-color: #2ee300;
       }
 
       #kk-presets .presets-set {
@@ -93,7 +79,7 @@ function main(userId) {
       }
 
       #kk-presets .presets-save {
-        --kk-presets-button-color: #b9b900;
+        --kk-dock-addon-button-color: #b9b900;
       }
     `,
     events: {
