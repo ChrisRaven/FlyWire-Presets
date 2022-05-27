@@ -9,30 +9,34 @@
 // ==/UserScript==
 
 
-if (!document.getElementById('kk-dock')) {
-  let script = document.createElement('script')
-  script.src = 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js'
-  script.addEventListener('load', wait)
-  document.head.appendChild(script)
-}
-else {
-  wait()
-}
 
-function wait() {
-  let wait = setInterval(() => {
-    userId = document.querySelector('#loggedInUserDropdown .nge-usercard-email')
-    if (userId) {
-      clearInterval(wait)
-      main(userId)
+let wait = setInterval(() => {
+  let userId = document.querySelector('#loggedInUserDropdown .nge-usercard-email')
+  if (userId) {
+    clearInterval(wait)
+    createDock(userId.textContent)
+  }
+}, 100)    
 
-    }
-  }, 100)    
+
+function createDock(userId) {
+  if (!document.getElementById('kk-dock')) {
+    let globalUserIdScript = document.createElement('script')
+    globalUserIdScript.text = 'globalThis.userId = "' + userId + '"'
+    document.head.appendChild(globalUserIdScript)
+
+    let script = document.createElement('script')
+    script.src = 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js'
+    script.addEventListener('load', () => main(userId))
+    document.head.appendChild(script)
+  }
+  else {
+    main(userId)
+  }
 }
 
 function main(userId) {
-  let dock = new Dock()
-  userId = userId.textContent
+  let dock = new Dock(userId)
 
   dock.addAddon({
     id: 'kk-presets',
@@ -62,15 +66,15 @@ function main(userId) {
       }
 
       #kk-presets .presets-1-set {
-        --kk-dock-addon-button-color: #5493d3;
+        --kk-dock-addon-button-color: #b03aff;
       }
 
       #kk-presets .presets-2-set {
-        --kk-dock-addon-button-color: #dd1f40;
+        --kk-dock-addon-button-color: #ed3bb0;
       }
 
       #kk-presets .presets-3-set {
-        --kk-dock-addon-button-color: #2ee300;
+        --kk-dock-addon-button-color: #46c8f7;
       }
 
       #kk-presets .presets-set {
@@ -79,7 +83,7 @@ function main(userId) {
       }
 
       #kk-presets .presets-save {
-        --kk-dock-addon-button-color: #b9b900;
+        --kk-dock-addon-button-color: #7bffd3;
       }
     `,
     events: {
