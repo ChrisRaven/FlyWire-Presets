@@ -27,16 +27,16 @@ function createDock(userId) {
 
     let script = document.createElement('script')
     script.src = 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js'
-    script.addEventListener('load', () => main(userId))
+    script.addEventListener('load', main)
     document.head.appendChild(script)
   }
   else {
-    main(userId)
+    main()
   }
 }
 
-function main(userId) {
-  let dock = new Dock(userId)
+function main() {
+  let dock = new Dock()
 
   dock.addAddon({
     id: 'kk-presets',
