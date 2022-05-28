@@ -1,39 +1,31 @@
 // ==UserScript==
 // @name         Presets
-// @namespace    http://tampermonkey.net/
+// @namespace    KrzysztofKruk
 // @version      0.1
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/ChrisRaven/FlyWire-Presets/main/Presets.user.js
+// @downloadURL  https://raw.githubusercontent.com/ChrisRaven/FlyWire-Presets/main/Presets.user.js
+// @homepageURL  https://github.com/ChrisRaven/FlyWire-Presets
 // ==/UserScript==
 
 
+(() => {
+  if (globalThis.dockIsReady) return main()
 
-let wait = setInterval(() => {
-  let userId = document.querySelector('#loggedInUserDropdown .nge-usercard-email')
-  if (userId) {
-    clearInterval(wait)
-    createDock(userId.textContent)
-  }
-}, 100)    
+  let script = document.createElement('script')
+  script.src = 'https://chrisraven.github.io/FlyWire-Dock/Dock.js'
+  document.head.appendChild(script)
 
-
-function createDock(userId) {
-  if (!document.getElementById('kk-dock')) {
-    let globalUserIdScript = document.createElement('script')
-    globalUserIdScript.text = 'globalThis.userId = "' + userId + '"'
-    document.head.appendChild(globalUserIdScript)
-
-    let script = document.createElement('script')
-    script.src = 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js'
-    script.addEventListener('load', main)
-    document.head.appendChild(script)
-  }
-  else {
-    main()
-  }
-}
+  let wait = setInterval(() => {
+    if (globalThis.dockIsReady) {
+      clearInterval(wait)
+      main()
+    }
+  }, 100)
+})()
 
 function main() {
   let dock = new Dock()
@@ -130,7 +122,7 @@ function savePresets(number) {
 }
 
 function readFromStorage(number) {
-  let result = localStorage.getItem(`${userId}-presets-${number}`)
+  let result = localStorage.getItem(`${Dock.userId}-presets-${number}`)
 
   if (result) {
     return JSON.parse(result)
@@ -141,7 +133,7 @@ function readFromStorage(number) {
 function writeToStorage(number, value) {
   // Source: https://stackoverflow.com/a/32179927
   let data = JSON.stringify(value, (k, v) => v === undefined ? null : v)
-  localStorage.setItem(`${userId}-presets-${number}`, data)
+  localStorage.setItem(`${Dock.userId}-presets-${number}`, data)
 }
 
 // we don't want to switch current cell(s), view and annotations
