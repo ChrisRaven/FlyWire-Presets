@@ -107,10 +107,19 @@ function setPresets(number) {
 
   if (state) {
     let targetState = viewer.state.toJSON()
+    removeOldLayersFromNewSettings(targetState, state)
     mergeObjects(targetState, state)
     viewer.state.restoreState(targetState)
   }
 }
+
+
+function removeOldLayersFromNewSettings(newSettings, oldSettings) {
+  let names = newSettings.layers.map(el => el.name)
+
+  oldSettings.layers.forEach((layer, i, layers) => names.includes(layer.name) ? null : delete layers[i])
+}
+
 
 function savePresets(number) {
   let state = viewer.state.toJSON()
@@ -121,6 +130,7 @@ function savePresets(number) {
   }
 }
 
+
 function readFromStorage(number) {
   let result = localStorage.getItem(`${Dock.userId}-presets-${number}`)
 
@@ -129,6 +139,7 @@ function readFromStorage(number) {
   }
   return null
 }
+
 
 function writeToStorage(number, value) {
   // Source: https://stackoverflow.com/a/32179927
