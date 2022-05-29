@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Presets
 // @namespace    KrzysztofKruk-FlyWire
-// @version      0.1.0.1
+// @version      0.1.1.0
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/*
