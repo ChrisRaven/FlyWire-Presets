@@ -11,12 +11,13 @@
 // @homepageURL  https://github.com/ChrisRaven/FlyWire-Presets
 // ==/UserScript==
 
+const DEV = true;
 
 (() => {
   if (globalThis.dockIsReady) return main()
 
   let script = document.createElement('script')
-  script.src = 'https://chrisraven.github.io/FlyWire-Dock/Dock.js'
+  script.src = DEV ? 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js' : 'https://chrisraven.github.io/FlyWire-Dock/Dock.js'
   document.head.appendChild(script)
 
   let wait = setInterval(() => {
