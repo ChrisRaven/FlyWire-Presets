@@ -133,7 +133,7 @@ function savePresets(number) {
 
 
 function readFromStorage(number) {
-  let result = localStorage.getItem(`${Dock.userId}-presets-${number}`)
+  let result = Dock.ls.get('presets-' + number)
 
   if (result) {
     return JSON.parse(result)
@@ -145,7 +145,7 @@ function readFromStorage(number) {
 function writeToStorage(number, value) {
   // Source: https://stackoverflow.com/a/32179927
   let data = JSON.stringify(value, (k, v) => v === undefined ? null : v)
-  localStorage.setItem(`${Dock.userId}-presets-${number}`, data)
+  Dock.ls.set('presets-' + number, data)
 }
 
 // we don't want to switch current cell(s), view and annotations
