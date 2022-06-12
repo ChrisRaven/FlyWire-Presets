@@ -11,7 +11,7 @@
 // @homepageURL  https://github.com/ChrisRaven/FlyWire-Presets
 // ==/UserScript==
 
-const DEV = true;
+const DEV = false;
 
 (() => {
   if (globalThis.dockIsReady) return main()
