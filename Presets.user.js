@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Presets
 // @namespace    KrzysztofKruk-FlyWire
-// @version      0.1.1.0
+// @version      0.1.2
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/*
@@ -155,6 +155,7 @@ function removeFields(presets) {
       delete layer.segmentColors
       delete layer.segments
       delete layer.pathFinder
+      delete layer.colorSeed
     }
     
     if (layer.type === "annotation") {
