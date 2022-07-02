@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Presets
 // @namespace    KrzysztofKruk-FlyWire
-// @version      0.1.2
+// @version      0.1.3
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/*
@@ -11,13 +11,11 @@
 // @homepageURL  https://github.com/ChrisRaven/FlyWire-Presets
 // ==/UserScript==
 
-const DEV = false;
-
 (() => {
   if (globalThis.dockIsReady) return main()
 
   let script = document.createElement('script')
-  script.src = DEV ? 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js' : 'https://chrisraven.github.io/FlyWire-Dock/Dock.js'
+  script.src = typeof DEV !== 'undefined' ? 'http://127.0.0.1:5501/FlyWire-Dock/Dock.js' : 'https://chrisraven.github.io/FlyWire-Dock/Dock.js'
   document.head.appendChild(script)
 
   let wait = setInterval(() => {
