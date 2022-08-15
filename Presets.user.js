@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Presets
 // @namespace    KrzysztofKruk-FlyWire
-// @version      0.1.3
+// @version      0.1.4
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/*
@@ -107,7 +107,7 @@ function setPresets(number) {
   if (state) {
     let targetState = viewer.state.toJSON()
     removeOldLayersFromNewSettings(targetState, state)
-    mergeObjects(targetState, state)
+    Dock.mergeObjects(targetState, state)
     viewer.state.restoreState(targetState)
   }
 }
@@ -169,37 +169,4 @@ function removeFields(presets) {
   delete presets.perspectiveZoom
   delete presets.selectedLayer
   delete presets.layout
-}
-
-
-function merge(target, key, value) {
-  let types = ['number', 'string', 'boolean', 'undefined', 'bigint']
-  let typeOfValue = typeof value
-
-  let nonExistent = typeof target[key] === 'undefined'
-  let isNull = value === null
-  let isPrimitive = types.includes(typeOfValue)
-  let isUndefined = value === undefined
-
-  if (nonExistent || isPrimitive || isUndefined) {
-    target[key] = value
-  }
-  // because JSON can't store undefined, we have to convert them to null when writing
-  // and then converting back to undefined at reading
-  if (isNull) {
-    target[key] = undefined
-  }
-  else if (Array.isArray(value)) {
-    value.forEach((el, index) => merge(target[key], index, el))
-  }
-  else if (typeOfValue === 'object') {
-    mergeObjects(target[key], value)
-  }
-}
-
-
-function mergeObjects(target, source) {
-  for (const [key, value] of Object.entries(source)) {
-    merge(target, key, value)
-  }
 }
