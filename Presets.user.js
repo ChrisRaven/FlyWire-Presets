@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Presets
 // @namespace    KrzysztofKruk-FlyWire
-// @version      0.1.4.1
+// @version      0.1.4.2
 // @description  Allows switching between various presets
 // @author       Krzysztof Kruk
 // @match        https://ngl.flywire.ai/*
-// @match        https://proofreading.flywire.ai/*
+// @match        https://edit.flywire.ai/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/ChrisRaven/FlyWire-Presets/main/Presets.user.js
 // @downloadURL  https://raw.githubusercontent.com/ChrisRaven/FlyWire-Presets/main/Presets.user.js
